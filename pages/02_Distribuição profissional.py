@@ -20,10 +20,6 @@ state_col = next((c for c, n in cols_norm.items() if any(k in n for k in state_k
 if state_col is None:
 	state_col = next((c for c, n in cols_norm.items() if 'uf' in n.split() or 'estado' in n.split()), None)
 
-if state_col is None:
-	st.error('Não foi possível identificar a coluna de UF/Estado automaticamente.')
-	st.write('Colunas detectadas (normalizadas):')
-	st.write([{ 'original': c, 'normalized': cols_norm[c] } for c in df.columns[:80]])
 else:
 	s = df[state_col].astype(str).str.strip()
 	sig = s.str.extract(r"\(([A-Za-z]{2})\)", expand=False)
